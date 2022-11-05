@@ -1,0 +1,1393 @@
+﻿@using DoAn_LapTrinhWeb.Models
+@using PagedList
+@using PagedList.Mvc;
+@model PagedList.PagedList<DoAn_LapTrinhWeb.Models.Product>
+@{
+    ViewBag.Title = "NHH Computer - Laptop, phụ kiện chính hãng";
+    ViewBag.ImageURL = "/Images/ImagesCollection/trang-chu.jpg";
+    ViewBag.Decription = "";
+    ViewBag.Tag = "Laptop, phụ kiện chính hãng";
+    Layout = "~/Views/Shared/Main_Layout.cshtml";
+    string defaultImg = "/Content/Images/no-image.jpg";
+    var HotProduct = (PagedList.PagedList<DoAn_LapTrinhWeb.Models.Product>)ViewBag.HotProduct;
+    var LaptopGamingSales = (PagedList.PagedList<DoAn_LapTrinhWeb.Models.Product>)ViewBag.LaptopGamingSales;
+    var LaptopForOfficeWorkSales = (PagedList.PagedList<DoAn_LapTrinhWeb.Models.Product>)ViewBag.LaptopForOfficeWorkSales;
+    var AccessorySales = (PagedList.PagedList<DoAn_LapTrinhWeb.Models.Product>)ViewBag.AccessorySales;
+    var PremiumLaptopSales = (PagedList.PagedList<DoAn_LapTrinhWeb.Models.Product>)ViewBag.PremiumLaptopSales;
+    var LaptopForGraphicDesignSales = (PagedList.PagedList<DoAn_LapTrinhWeb.Models.Product>)ViewBag.LaptopForGraphicDesignSales;
+    var DeskSales = (PagedList.PagedList<DoAn_LapTrinhWeb.Models.Product>)ViewBag.DeskSales;
+    var MonitorSales = (PagedList.PagedList<DoAn_LapTrinhWeb.Models.Product>)ViewBag.MonitorSales;
+    var ComponentSales = (PagedList.PagedList<DoAn_LapTrinhWeb.Models.Product>)ViewBag.ComponentSales;
+    var NewProduct = (PagedList.PagedList<DoAn_LapTrinhWeb.Models.Product>)ViewBag.NewProduct;
+}
+<div class="container-fluid banner_vertical">
+    @foreach (var item in ViewBag.BannerVertical)
+    {
+        <div class="banner_vertical_left">
+            <a href="/khuyen-mai/@SlugGenerator.SlugGenerator.GenerateSlug(item.banner_name)-@item.banner_id"><img class="bannervertical_img rounded-2 shadow-lg" src="@item.image_thumbnail" /></a>
+        </div>
+    }
+    @foreach (var item in ViewBag.BannerVertical)
+    {
+        <div class="banner_vertical_right">
+            <a href="/khuyen-mai/@SlugGenerator.SlugGenerator.GenerateSlug(item.banner_name)-@item.banner_id"><img class="bannervertical_img rounded-2 shadow-lg " alt="@item.banner_name" src="@item.image_thumbnail" /></a>
+        </div>
+    }
+</div>
+<!--begin::Container-->
+<div class="container">
+    <!--begin::Row-->
+    <div class="row">
+        <!--begin::Carousel-->
+        <div class="carousel slide margin_carousel" id="main-carousel" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#main-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#main-carousel" data-slide-to="1"></li>
+                <li data-target="#main-carousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner rounded-3 shadow-lg">
+                @{
+                    var first = true;
+                }
+                @foreach (var item in ViewBag.BannerHeader)
+                {
+                    <div class="carousel-item @(first?Html.Raw("active"):Html.Raw(""))">
+                        <a href="/khuyen-mai/@SlugGenerator.SlugGenerator.GenerateSlug(item.banner_name)-@item.banner_id">
+                            <img class="bannerheader_img d-block img-fluid"  src="@item.image_thumbnail" alt="@item.banner_name">
+                        </a>
+                    </div>
+                    first = false;
+                }
+            </div>
+            <!--begin::Butotn Prev-->
+            <a href="#main-carousel" class="carousel-control-prev" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="sr-only" aria-hidden="true">Prev</span>
+            </a>
+            <!--end::Butotn Prev-->
+            <!--begin::Butotn Next-->
+            <a href="#main-carousel" class="carousel-control-next" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="sr-only" aria-hidden="true">Next</span>
+            </a>
+            <!--end::Butotn Next-->
+        </div>
+        <!--end::Carousel-->
+    </div>
+    <!--end::Row-->
+</div>
+<!--end::Container-->
+<!--begin::Container-->
+<div id="fadeshow2" class="container mt-2 ">
+    <!--begin::Row-->
+    <div class="row">
+        @foreach (var item in ViewBag.BannerBottom)
+        {
+            <div class="col-lg-3">
+                <a href="/khuyen-mai/@SlugGenerator.SlugGenerator.GenerateSlug(item.banner_name)-@item.banner_id">
+                    <img class="img-responsive rounded-3 shadow-lg transition bannerbottom_img" alt="@item.banner_name" src="@item.image_thumbnail">
+                </a>
+            </div>
+        }
+    </div>
+    <!--end::Row-->
+</div>
+<!--end::Container-->
+<!--begin::Container-->
+<div class="container ">
+    <div class="boder_product_home pd_listproduct_home">
+        <!--begin::Row-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <!--begin::Title Head-->
+                    <div class="main_heading ">
+                        <p class="h4 text-uppercase color_text_primary">Sản Phẩm mới</p>
+                    </div>
+                    <!--end::Title Head-->
+                </div>
+            </div>
+        </div>
+        <!--end::Row-->
+        <!--begin::Row-->
+        <div class="row">
+            @foreach (var item in NewProduct)
+            {
+                <!--begin::Col-->
+                <div class="col-lg-3 margin_bottom_20_all">
+                    <!--begin::Product List-->
+                    <div class="product_list">
+                        @if (item.Type == 1)
+                        {
+                            <a href="/laptop/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"></div>
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else if (item.Type == 3)
+                        {
+                            <a href="/man-hinh/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"></div>
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limit2line color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else if (item.Type == 4)
+                        {
+                            <a href="/ban-ghe/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @*href bạn có thể thay bằng href="@Url.Action("Productdetail", "Products", new { id = @item.product_id })"*@
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div>
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limit2line color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else if (item.Type == 5)
+                        {
+                            <a href="/linh-kien/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div>
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/san-pham/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div>
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        <div class="product_detail_btm">
+                            <!--begin:Product Star-->
+                            <div class="starratin">
+                                <div class="center">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <!--end:Product Star-->
+                            <!--begin::Product Price-->
+                            <div class="product_price">
+                                <p>
+                                    @if (item.Discount != null)
+                                    {
+                                        if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                        {
+                                            <span class="old_price">@item.price.ToString("#,###₫")</span> <span class="new_price">@((item.price - item.Discount.discount_price).ToString("#,0₫"))</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="new_price">@item.price.ToString("#,###₫")</span>}
+                                </p>
+                            </div>
+                            <!--end::Product Price-->
+                        </div>
+                    </div>
+                    <!--begin::Product List-->
+                </div>
+                <!--begin::Col-->
+            }
+            <!--begin::Pagination-->
+            <div class="center mb-20px">
+                @Html.PagedListPager(NewProduct, page => Url.Action("Index", new { @page = page }), new PagedListRenderOptions
+                {
+                    LinkToPreviousPageFormat = "‹",
+                    LinkToNextPageFormat = "›",
+                    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                    MaximumPageNumbersToDisplay = 3
+                })
+            </div>
+            <!--end::Pagination-->
+        </div>
+        <!--end::Row-->
+    </div>
+</div>
+<!--end::Container-->
+<!--begin::Container-->
+<div class="container">
+    <div class="boder_product_home pd_listproduct_home">
+        <!--begin::Row-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="main_heading ">
+                        <p class="h4 text-uppercase color_text_primary">Sản Phẩm Hot</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end::Row-->
+        <!--begin::Row-->
+        <div class="row">
+            @foreach (var item in HotProduct)
+            {
+                <!--begin::Col-->
+                <div class="col-lg-3 margin_bottom_20_all">
+                    <!--begin::Product List-->
+                    <div class="product_list">
+                        @if (item.Type == 1)
+                        {
+                            <a href="/laptop/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">
+                                            @item.product_name
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else if (item.Type == 3)
+                        {
+                            <a href="/man-hinh/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limit2line color_text_primary">
+                                            @item.product_name
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else if (item.Type == 4)
+                        {
+                            <a href="/ban-ghe/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limit2line color_text_primary">
+                                            @item.product_name
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else if (item.Type == 5)
+                        {
+                            <a href="/linh-kien/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">
+                                            @item.product_name
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/san-pham/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">
+                                            @item.product_name
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        <div class="product_detail_btm">
+                            <div class="starratin">
+                                <div class="center">
+                                    <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <!--begin::Product Price-->
+                            <div class="product_price">
+                                <p>
+                                    @if (item.Discount != null)
+                                    {
+                                        if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                        {
+                                            <span class="old_price">@item.price.ToString("#,###₫")</span> <span class="new_price">@((item.price - item.Discount.discount_price).ToString("#,0₫"))</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                    }
+                                </p>
+                            </div>
+                            <!--end::Product Price-->
+                        </div>
+                    </div>
+                    <!--end::Product List-->
+                </div>
+                <!--end::Col-->
+            }
+            <!--begin::Pagination-->
+            <div class="center mb-20px">
+                @Html.PagedListPager(HotProduct, page => Url.Action("Index", new { @page = page }), new PagedListRenderOptions
+                {
+                    LinkToPreviousPageFormat = "‹",
+                    LinkToNextPageFormat = "›",
+                    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                    MaximumPageNumbersToDisplay = 3
+                })
+            </div>
+            <!--end::Pagination-->
+        </div>
+        <!--end::Row-->
+    </div>
+</div>
+<!--end::Container-->
+<!--begin::Container-->
+<div class="container">
+    <div class="boder_product_home pd_listproduct_home">
+        <!--begin::Row-->
+        <div class="row">
+            <!--begin::Col-->
+            <div class="col-md-12 ">
+                <div class="full">
+                    <!--begin::Title Head-->
+                    <div class="main_heading ">
+                        <p class="h4 text-uppercase color_text_primary">Linh kiện điện tử</p>
+                    </div>
+                    <!--end::Title Head-->
+                </div>
+            </div>
+        </div>
+        <!--end::Row-->
+        <!--begin::Row-->
+        <div class="row">
+            @foreach (var item in ComponentSales)
+            {
+                <div class="col-lg-3 margin_bottom_20_all">
+                    <div class="product_list">
+                        @if (item.Type == 5)
+                        {
+                            <a href="/linh-kien/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1" && item.Discount.status == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/san-pham/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @*href bạn có thể thay bằng href="@Url.Action("Productdetail", "Products", new { id = @item.product_id })"*@
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        <div class="product_detail_btm">
+                            <div class="starratin">
+                                <div class="center">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="product_price">
+                                <p>
+                                    @if (item.Discount != null)
+                                    {
+                                        if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                        {
+                                            <span class="old_price">@item.price.ToString("#,###₫")</span> <span class="new_price">@((item.price - item.Discount.discount_price).ToString("#,0₫"))</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+            <!--begin::Pagination-->
+            <div class="center mb-20px">
+                @Html.PagedListPager(ComponentSales, page => Url.Action("Index", new { @page = page }), new PagedListRenderOptions
+                {
+                    LinkToPreviousPageFormat = "‹",
+                    LinkToNextPageFormat = "›",
+                    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                    MaximumPageNumbersToDisplay = 3
+                })
+            </div>
+            <!--end::Pagination-->
+        </div>
+        <!--end::Row-->
+    </div>
+</div>
+<!--end::Container-->
+<!--begin::Container-->
+<div class="container">
+    <div class="boder_product_home pd_listproduct_home">
+        <!--begin::Row-->
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="full">
+                    <div class="main_heading ">
+                        <p class="h4 text-uppercase color_text_primary">Màn hình</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end::Row-->
+        <!--begin::Row-->
+        <div class="row">
+            @foreach (var item in MonitorSales)
+            {
+                <div class="col-lg-3 margin_bottom_20_all">
+                    <div class="product_list">
+                        @if (item.Type == 3)
+                        {
+                            <a href="/man-hinh/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limit2line color_text_primary">
+                                            @item.product_name
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else if (item.Type == 5)
+                        {
+                            <a href="/linh-kien/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"></div>
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">
+                                            @item.product_name
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/san-pham/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @*href bạn có thể thay bằng href="@Url.Action("Productdetail", "Products", new { id = @item.product_id })"*@
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"></div>
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">
+                                            @item.product_name
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        <div class="product_detail_btm">
+                            <div class="starratin">
+                                <div class="center">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="product_price">
+                                <p>
+                                    @if (item.Discount != null)
+                                    {
+                                        if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                        {
+                                            <span class="old_price">@item.price.ToString("#,###₫")</span> <span class="new_price">@((item.price - item.Discount.discount_price).ToString("#,0₫"))</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+            <div class="center mb-20px">
+                @Html.PagedListPager(MonitorSales, page => Url.Action("Index", new { @page = page }), new PagedListRenderOptions
+                {
+                    LinkToPreviousPageFormat = "‹",
+                    LinkToNextPageFormat = "›",
+                    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                    MaximumPageNumbersToDisplay = 3
+                })
+            </div>
+        </div>
+        <!--end::Row-->
+    </div>
+</div>
+<!--end::Container-->
+<!--begin::Container-->
+<div class="container ">
+    <div class="boder_product_home pd_listproduct_home">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="main_heading ">
+                        <p class="h4 text-uppercase color_text_primary">Laptop Học Tập - Văn Phòng</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in LaptopForOfficeWorkSales)
+            {
+                <div class="col-lg-3 margin_bottom_20_all">
+                    <div class="product_list">
+                        @if (item.Type == 1)
+                        {
+                            <a href="/laptop/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/san-pham/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @*href bạn có thể thay bằng href="@Url.Action("Productdetail", "Products", new { id = @item.product_id })"*@
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        <div class="product_detail_btm">
+                            <div class="starratin">
+                                <div class="center">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="product_price">
+                                <p>
+                                    @if (item.Discount != null)
+                                    {
+                                        if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                        {
+                                            <span class="old_price">@item.price.ToString("#,###₫")</span> <span class="new_price">@((item.price - item.Discount.discount_price).ToString("#,0₫"))</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+            <div class="center mb-20px">
+                @Html.PagedListPager(LaptopForOfficeWorkSales, page => Url.Action("Index", new { @page = page }), new PagedListRenderOptions
+                {
+                    LinkToPreviousPageFormat = "‹",
+                    LinkToNextPageFormat = "›",
+                    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                    MaximumPageNumbersToDisplay = 3
+                })
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Container-->
+<!--begin::Container-->
+<div class="container">
+    <div class="boder_product_home pd_listproduct_home">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="main_heading ">
+                        <p class="h4 text-uppercase color_text_primary">Laptop Đồ Hoạ - Kĩ Thuật</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in LaptopForGraphicDesignSales)
+            {
+                <div class="col-lg-3 margin_bottom_20_all">
+                    <div class="product_list">
+                        @if (item.Type == 1)
+                        {
+                            <a href="/laptop/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"></div> 
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/san-pham/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @*href bạn có thể thay bằng href="@Url.Action("Productdetail", "Products", new { id = @item.product_id })"*@
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"></div> 
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        <div class="product_detail_btm">
+                            <div class="starratin">
+                                <div class="center">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="product_price">
+                                <p>
+                                    @if (item.Discount != null)
+                                    {
+                                        if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                        {
+                                            <span class="old_price">@item.price.ToString("#,###₫")</span> <span class="new_price">@((item.price - item.Discount.discount_price).ToString("#,0₫"))</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="center mb-20px">
+                @Html.PagedListPager(LaptopForGraphicDesignSales, page => Url.Action("Index", new { @page = page }), new PagedListRenderOptions
+                {
+                    LinkToPreviousPageFormat = "‹",
+                    LinkToNextPageFormat = "›",
+                    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                    MaximumPageNumbersToDisplay = 3
+                })
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Container-->
+<!--begin::Container-->
+<div class="container ">
+    <div class="boder_product_home pd_listproduct_home">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="main_heading ">
+                        <p class="h4 text-uppercase color_text_primary">Laptop Gaming</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in LaptopGamingSales)
+            {
+                <div class="col-lg-3 margin_bottom_20_all">
+                    <div class="product_list">
+                        @if (item.Type == 1)
+                        {
+                            <a href="/laptop/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/san-pham/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @*href bạn có thể thay bằng href="@Url.Action("Productdetail", "Products", new { id = @item.product_id })"*@
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        <div class="product_detail_btm">
+                            <div class="starratin">
+                                <div class="center">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="product_price">
+                                <p>
+                                    @if (item.Discount != null)
+                                    {
+                                        if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                        {
+                                            <span class="old_price">@item.price.ToString("#,###₫")</span> <span class="new_price">@((item.price - item.Discount.discount_price).ToString("#,0₫"))</span> }
+                                        else
+                                        {
+                                            <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="center mb-20px">
+                @Html.PagedListPager(LaptopGamingSales, page => Url.Action("Index", new { @page = page }), new PagedListRenderOptions
+                {
+                    LinkToPreviousPageFormat = "‹",
+                    LinkToNextPageFormat = "›",
+                    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                    MaximumPageNumbersToDisplay = 3
+                })
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Container-->
+<!--begin::Container-->
+<div class="container ">
+    <div class="boder_product_home pd_listproduct_home">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="main_heading ">
+                        <p class="h4 text-uppercase color_text_primary">laptop Cao Cấp - Sang Trọng</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in PremiumLaptopSales)
+            {
+                <div class="col-lg-3  margin_bottom_20_all">
+                    <div class="product_list">
+                        @if (item.Type == 1)
+                        {
+                            <a href="/laptop/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">
+                                            @item.product_name
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/san-pham/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @*href bạn có thể thay bằng href="@Url.Action("Productdetail", "Products", new { id = @item.product_id })"*@
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        <div class="product_detail_btm">
+                            <div class="starratin">
+                                <div class="center">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="product_price">
+                                <p>
+                                    @if (item.Discount != null)
+                                    {
+                                        if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                        {
+                                            <span class="old_price">@item.price.ToString("#,###₫")</span> <span class="new_price">@((item.price - item.Discount.discount_price).ToString("#,0₫"))</span> }
+                                        else
+                                        {
+                                            <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>}
+            <div class="center mb-20px">
+                @Html.PagedListPager(PremiumLaptopSales, page => Url.Action("Index", new { @page = page }), new PagedListRenderOptions
+                {
+                    LinkToPreviousPageFormat = "‹",
+                    LinkToNextPageFormat = "›",
+                    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                    MaximumPageNumbersToDisplay = 3
+                })
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Container-->
+<!--begin::Container-->
+<div class="container ">
+    <div class="boder_product_home pd_listproduct_home">
+        <div class="row ">
+            <div class="col-md-12 ">
+                <div class="full">
+                    <div class="main_heading ">
+                        <p class="h4 text-uppercase color_text_primary">Bàn - ghế</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            @foreach (var item in DeskSales)
+            {
+                <div class="col-lg-3 margin_bottom_20_all">
+                    <div class="product_list">
+                        @if (item.Type == 4)
+                        {
+                            <a href="/ban-ghe/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"></div>
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limit2line color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/san-pham/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @*href bạn có thể thay bằng href="@Url.Action("Productdetail", "Products", new { id = @item.product_id })"*@
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"></div> 
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        <div class="product_detail_btm">
+                            <div class="starratin">
+                                <div class="center">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="product_price">
+                                <p>
+                                    @if (item.Discount != null)
+                                    {
+                                        if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                        {
+                                            <span class="old_price">@item.price.ToString("#,###₫")</span> <span class="new_price">@((item.price - item.Discount.discount_price).ToString("#,0₫"))</span> }
+                                        else
+                                        {
+                                            <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="center mb-20px">
+                @Html.PagedListPager(DeskSales, page => Url.Action("Index", new { @page = page }), new PagedListRenderOptions
+                {
+                    LinkToPreviousPageFormat = "‹",
+                    LinkToNextPageFormat = "›",
+                    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                    MaximumPageNumbersToDisplay = 3
+                })
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Container-->
+<!--begin::Container-->
+<div class="container">
+    <div class="boder_product_home pd_listproduct_home">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="main_heading ">
+                        <p class="h4 text-uppercase color_text_primary">Phụ Kiện</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in AccessorySales)
+            {
+                <div class="col-lg-3  margin_bottom_20_all">
+                    <div class="product_list">
+                        @if (item.Type == 2)
+                        {
+                            <a href="/phu-kien/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @if (item.Discount != null)
+                                {
+                                    if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                    {
+                                        <div class="bs-discount star mg_discount">
+                                            <span>-@((((item.price)/(item.price))-((item.price - item.Discount.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                        </div>
+                                    }
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/san-pham/@SlugGenerator.SlugGenerator.GenerateSlug(item.title_seo)-@item.product_id">
+                                @*href bạn có thể thay bằng href="@Url.Action("Productdetail", "Products", new { id = @item.product_id })"*@
+                                <div class="product_img"> <img class="img-responsive" src="@(item.image != null ? item.image : defaultImg)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">
+                                            @item.product_name
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        <div class="product_detail_btm">
+                            <div class="starratin">
+                                <div class="center">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="product_price">
+                                <p>
+                                    @if (item.Discount != null)
+                                    {
+                                        if (item.Discount.discount_start < DateTime.Now && item.Discount.discount_end > DateTime.Now && item.Discount.status.Trim() == "1")
+                                        {
+                                            <span class="old_price">@item.price.ToString("#,###₫")</span> <span class="new_price">@((item.price - item.Discount.discount_price).ToString("#,0₫"))</span> }
+                                        else
+                                        {
+                                            <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>}
+            <div class="center mb-20px">
+                @Html.PagedListPager(AccessorySales, page => Url.Action("Index", new { @page = page }), new PagedListRenderOptions
+                {
+                    LinkToPreviousPageFormat = "‹",
+                    LinkToNextPageFormat = "›",
+                    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                    MaximumPageNumbersToDisplay = 3
+                })
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Container-->
+<!--begin::Container-->
+<div class="container">
+    <div class="boder_product_home pd_listproduct_home">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="full">
+                    <div class="main_heading ">
+                        <p class="h4 text-uppercase">Tin Tức Mới Nhất</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-md-4">
+                <div class="full blog_colum">
+                    <a href="@Url.Action("News", "News")">
+                        <div class="blog_feature_img">
+                            <img src="https://cdn.techzones.vn/Data/Sites/1/News/3088/thumbs/450xtechzones-cpu-amd-tren-desktop-co-con-nong-nhu-loi-don-.jpg"
+                                 alt="#" />
+                        </div>
+                        <div class="post_time">
+                            <p><i class="fa fa-clock-o"></i> 27/06/2021</p>
+                        </div>
+                        <div class="blog_feature_head">
+                            <p class="h6">CPU AMD trên desktop có còn nóng như lời đồn ?</p>
+                        </div>
+                        <div class="blog_feature_cont">
+                            <p class="limitlinetext">
+                                AMD là một trong những hãng công nghệ luôn nằm trong top đầu trên thị trường hiện
+                                nay.
+                                Các dòng phân khúc sản phẩm thuộc AMD đều nhận được đánh giá, phản hồi tích cực từ người dùng.
+                                Đặc biệt là CPU AMD là một cái tên lừng lẫy không thể bỏ qua khi nhắc đến thương hiệu AMD nói riêng và
+                                sản phẩm CPU nói chung.
+                                Tuy nhiên có rất nhiều luồng ý kiến cho rằng liệu CPU AMD trên Desktop có còn nóng như lời đồn? Bạn suy
+                                nghĩ như thế nào về ý kiến trên.
+                                Còn chúng tôi câu trả lời nằm trong bài viết dưới đây.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="full blog_colum">
+                    <a href="@Url.Action("News", "News")">
+                        <div class="blog_feature_img">
+                            <img src="https://cdn.techzones.vn/Data/Sites/1/media/tin-t%E1%BB%A9c-/co-nen-su-dung-gaming-laptop-cho-lam-viec-van-phong/co-nen-su-dung-gaming-laptop-cho-lam-viec-van-phong.jpg?w=1920"
+                                 alt="#" />
+                        </div>
+                        <div class="post_time">
+                            <p><i class="fa fa-clock-o"></i> 25/06/2021</p>
+                        </div>
+                        <div class="blog_feature_head">
+                            <p class="h6">Có nên sử dụng gaming laptop để làm việc văn phòng?</p>
+                        </div>
+                        <div class="blog_feature_cont">
+                            <p class="limitlinetext">
+                                Với nhu cầu làm việc văn phòng hầu như ai cũng cần đến một chiếc laptop. Tuy
+                                nhiên lựa chọn dòng laptop nào để thật sự phù hợp lại là câu hỏi khó.
+                                Gaming laptop là một dòng máy tính xách tay rất được nhắc đến dạo gần đây cho dân làm việc văn phòng.
+                                Vậy theo bạn có nên sử dụng gaming laptop
+                                để làm việc hay không? Hãy đón chờ xem câu trả lời dưới đây có trùng khớp với bạn không nhé.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="full blog_colum">
+                    <a href="@Url.Action("News", "News")">
+                        <div class="blog_feature_img">
+                            <img src="https://cdn.techzones.vn/Data/Sites/1/media/tin-t%E1%BB%A9c-/lua-chon-laptop-gaming-nhu-the-nao-la-hop-ly/lua-chon-mua-laptop-gaming-nhu-the-nao-la-phu-hop.jpg"
+                                 alt="#" />
+                        </div>
+                        <div class="post_time">
+                            <p><i class="fa fa-clock-o"></i> 24/06/2021</p>
+                        </div>
+                        <div class="blog_feature_head">
+                            <p class="h6">Lựa chọn laptop gaming như thế nào là phù hợp</p>
+                        </div>
+                        <div class="blog_feature_cont">
+                            <p class="limitlinetext">
+                                Bạn đang muốn trang bị cho mình một chiếc laptop gaming nhưng lại đang không biết
+                                lựa chọn laptop gaming như thế nào là phù hợp.
+                                Thì bạn tìm đúng địa chỉ rồi nhé, bài viết cực kỳ lý thú và thiết thực này sẽ giúp bạn
+                                không những mua đúng laptop gaming thật sự ưng ý mà còn giúp bạn thỏa mãn nh cầu khám phá dòng laptop
+                                chơi game quốc dân này.
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--begin::Container-->
+<div>
+    <div class="container">
+        <div class="boder_product_home pd_listproduct_home">
+            <div class="row">
+                <div class="margin_bottom_brand">
+                    <div class="full">
+                        <div class="main_heading1 ">
+                            <p class="h4 text-uppercase">Nhãn Hàng Đồng Hành</p>
+                        </div>
+                        <ul class="brand_list">
+                            <li><a href="https://www.msi.com/" target="_blank"><img cl src="~/Images/it_service/msi_brand.png" alt="#" /></a></li>
+                            <li><a href="https://www.dell.com/" target="_blank"><img src="~/Images/it_service/dell_brand.png" alt="#" /></a></li>
+                            <li><a href="https://www.asus.com/" target="_blank"><img src="~/Images/it_service/asusbrand.png" alt="#" /></a></li>
+                            <li><a href="https://www.acer.com/" target="_blank"><img src="~/Images/it_service/acer_brand.png" alt="#" /></a></li>
+                            <li><a href="https://www.lenovo.com/" target="_blank"><img src="~/Images/it_service/lenovo_brand.png" alt="#" /></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

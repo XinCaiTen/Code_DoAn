@@ -1,0 +1,171 @@
+﻿@using PagedList.Mvc;
+@model PagedList.PagedList<DoAn_LapTrinhWeb.DTOs.BannerDTOs>
+@{
+    ViewBag.Title = "Khuyến mãi " + ViewBag.Bannername;
+    Layout = "~/Views/Shared/Main_Layout.cshtml";
+}
+<!--begin::Section-->
+<div class="section product_list_main">
+    <!--begin::Container-->
+    <div class="container">
+        <!--begin::Breadcrumb-->
+        <div class="breadcrumb1">
+            <!--begin::Ul-->
+            <ul class="breadcrumb__list">
+                <li><a href="/"><i aria-hidden="true" class="fa fa-home"></i></a> <i aria-hidden="true" class="far fa-angle-right"></i></li>
+                <li><a href="@Url.Action("Index", "Home")">Trang chủ</a> <i aria-hidden="true" class="far fa-angle-right"></i></li>
+                <li><a href="@Url.Action("Listbanner", "Discount")">Khuyến mãi</a> <i aria-hidden="true" class="far fa-angle-right"></i></li>
+                <!--ViewBag.Type | path: action "Laptop,Accessory,Table,.." Controller "Products"-->
+                <li><a>@ViewBag.Bannername</a></li>
+            </ul>
+            <!--end::Ul-->
+        </div>
+        <!--end::Breadcrumb-->
+        <!--begin::Row-->
+        <div class="row boderproductdetail pd_listproduct2">
+            @foreach (var item in Model)
+            {
+                <!--begin:Col-->
+                <div class="col-lg-3 margin_bottom_20_all">
+                    <!--begin::Prodcut List-->
+                    <div class="product_list">
+                        @if (item.product_type == 1)
+                        {
+                            <a href="/laptop/@SlugGenerator.SlugGenerator.GenerateSlug(item.seo_title)-@item.product_id">
+                                @if (item.discount_start < DateTime.Now && item.discount_end > DateTime.Now)
+                                {
+                                    <div class="bs-discount star mg_discount">
+                                        <span>-@((((item.price)/(item.price))-((item.price - item.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                    </div>
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.product_img)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else if (item.product_type == 3)
+                        {
+                            <a href="/man-hinh/@SlugGenerator.SlugGenerator.GenerateSlug(item.seo_title)-@item.product_id">
+
+                                @if (item.discount_start < DateTime.Now && item.discount_end > DateTime.Now)
+                                {
+                                    <div class="bs-discount star mg_discount">
+                                        <span>-@((((item.price)/(item.price))-((item.price - item.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                    </div>
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.product_img)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limit2line color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else if (item.product_type == 4)
+                        {
+                            <a href="/ban-ghe/@SlugGenerator.SlugGenerator.GenerateSlug(item.seo_title)-@item.product_id">
+
+                                @if (item.discount_start < DateTime.Now && item.discount_end > DateTime.Now)
+                                {
+                                    <div class="bs-discount star mg_discount">
+                                        <span>-@((((item.price)/(item.price))-((item.price - item.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                    </div>
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.product_img)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limit2line color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else if (item.product_type == 5)
+                        {
+                            <a href="/linh-kien/@SlugGenerator.SlugGenerator.GenerateSlug(item.seo_title)-@item.product_id">
+
+                                @if (item.discount_start < DateTime.Now && item.discount_end > DateTime.Now)
+                                {
+                                    <div class="bs-discount star mg_discount">
+                                        <span>-@((((item.price)/(item.price))-((item.price - item.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                    </div>
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.product_img)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/san-pham/@SlugGenerator.SlugGenerator.GenerateSlug(item.seo_title)-@item.product_id">
+
+                                @if (item.discount_start < DateTime.Now && item.discount_end > DateTime.Now)
+                                {
+                                    <div class="bs-discount star mg_discount">
+                                        <span>-@((((item.price)/(item.price))-((item.price - item.discount_price)/(item.price))).ToString("0.00%"))</span>
+                                    </div>
+                                }
+                                <div class="product_img"> <img class="img-responsive" src="@(item.product_img)" alt="@item.product_name"> </div> @*nếu không có ảnh sản phẩm sẽ hiển thị hình ảnh no-image của web site*@
+                                <div class="product_detail_btm">
+                                    <div class="center">
+                                        <p class="limitlinetext color_text_primary">@item.product_name</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        <div class="product_detail_btm">
+                            <!--begin::Product Star-->
+                            <div class="starratin">
+                                <div class="center">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <!--end::Product Star-->
+                            <!--begin::Product Price-->
+                            <div class="product_price">
+                                <p>
+                                    @if (item.discount_start < DateTime.Now && item.discount_end > DateTime.Now)
+                                    {
+                                        <span class="old_price">@item.price.ToString("#,###₫")</span> <span class="new_price">@((item.price - item.discount_price).ToString("#,0₫"))</span> }
+                                    else
+                                    {
+                                        <span class="new_price">@item.price.ToString("#,###₫")</span>
+                                    }
+                                </p>
+                            </div>
+                             <!--end::Product Price-->
+                        </div>
+                    </div>
+                    <!--end::Prodcut List-->
+                </div>
+                <!--end:Col-->
+            }
+            <!--begin::Pagination-->
+            <div class="center mb-20px">
+                @Html.PagedListPager(Model, page => Url.Action("Bannerdetail", new { @page = page }), new PagedListRenderOptions
+                {
+                    LinkToPreviousPageFormat = "‹",
+                    LinkToNextPageFormat = "›",
+                    DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                    DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                    DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                    MaximumPageNumbersToDisplay = 3
+                })
+            </div>
+            <!--end::Pagination-->
+        </div>
+        <!--end::Row-->
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Section-->
